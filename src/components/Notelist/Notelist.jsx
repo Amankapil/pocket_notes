@@ -10,14 +10,14 @@ function NoteList({ notes, selectedGroup }) {
     <div className="flex-1 p- bg-[#DAE5F5]  h-[700px] overflow-y-scroll">
       {selectedGroup && (
         <div
-          className="p-4 mb-4 text-white sticky h-[70px] top-0"
+          className="p-4 mb-4 text-white sticky h-[70px] top-0 max-md:hidden"
           style={{ backgroundColor: selectedGroup.color }}
         >
           <h2 className="text-2xl">{selectedGroup.name}</h2>
         </div>
       )}
       {notes.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-full  bg-[#DAE5F5] p-4 ">
+        <div className="flex flex-col items-center justify-center h-full  bg-[#DAE5F5] p-6 ">
           <img src={img} alt="No notes" className="mb-4" />
           <h2 className="text-[40px] font-bold mb-2">Pocket Notes</h2>
           <p className="text-[#000] font-semibold text-[18px] mb-4 w-[50%] text-center">
@@ -46,14 +46,24 @@ function NoteList({ notes, selectedGroup }) {
             key={note._id}
             className="p-4 bg-gray-100 mb-4 rounded shadow-md m-4"
           >
-            <div>{note.content}</div>
-            <div className="text-gray-600 text-sm">
-              {new Date(note.createdAt).toLocaleString()}
+            <div className="font-semibold">{note.content}</div>
+            <div className="text-gray-600 text-sm text-end font-bold">
+              {/* {new Date(note.createdAt).toLocaleString()} */}
+              {new Date(note.createdAt).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}{" "}
+              {new Date(note.createdAt).toLocaleTimeString("en-GB", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
             </div>
           </div>
         ))
       )}
-      <div ref={bottomRef}></div>
+      <div className="max-mdhidden" ref={bottomRef}></div>
     </div>
   );
 }

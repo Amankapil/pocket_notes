@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Sidebar({ groups, onGroupSelect, onNewGroup }) {
+  const [selectedGroupId, setSelectedGroupId] = useState(null);
+
   const getGroupInitials = (name) => {
     const words = name.split(" ");
     const initials = words
@@ -16,12 +18,18 @@ function Sidebar({ groups, onGroupSelect, onNewGroup }) {
       .slice(0, 2);
     return initials.join(" ");
   };
+
+  const handleGroupSelect = (id) => {
+    setSelectedGroupId(id); // Update the selected group ID
+    onGroupSelect(id); // Call the parent function if needed
+  };
+
   return (
     <div className="w-64 bg-white text-black h-full relative overflow-hidden">
-      <div className="p-4 mb-4 text-black ">
+      <div className="p-4 mb-4 text-black">
         <h2 className="text-2xl">Pocket Notes</h2>
       </div>
-      <div className="p-4 absolute bottom-10 right-5  rounded-full">
+      <div className="p-4 absolute bottom-10 right-5 rounded-full">
         <button
           onClick={onNewGroup}
           className="bg-[#16008B] flex justify-center items-center py-2 rounded-full w-[50px] h-[50px]"
@@ -44,18 +52,18 @@ function Sidebar({ groups, onGroupSelect, onNewGroup }) {
         {groups.map((group) => (
           <li
             key={group._id}
-            className="px-4 py-2 cursor-pointer"
-            // style={{ backgroundColor: group.color }}
-            onClick={() => onGroupSelect(group._id)}
+            className={`px-4 py-2 cursor-pointer opacity-60 max-md:opacity-100 ${
+              selectedGroupId === group._id ? "bg-[#2f2f2f36] opacity-100" : ""
+            }`}
+            onClick={() => handleGroupSelect(group._id)}
           >
-            <div className="flex items-center justify-start text-[20px]  gap-4">
+            <div className="flex items-center justify-start text-[18px] gap-4">
               <span
                 style={{ backgroundColor: group.color }}
-                className="h-[50px] w-[50px] text-[24px] rounded-full text-[white] flex items-center justify-center"
+                className="h-[50px] w-[50px] text-[21px] rounded-full text-[white] flex items-center justify-center"
               >
                 {getGroupInitials(group.name)}
               </span>
-              {/* {group.name} */}
               {getGroupInitials2(group.name)}
             </div>
           </li>

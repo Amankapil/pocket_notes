@@ -29,7 +29,10 @@ function GroupModal({ onClose, onSave }) {
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-      <div ref={modalRef} className="bg-white p-4 rounded w-[30%]">
+      <div
+        ref={modalRef}
+        className="bg-white p-4 rounded w-[30%] max-md:w-[90%]"
+      >
         <h1 className="text-[22px] font-bold mb-5">Create New Group</h1>
         <div className="mb-4 flex w-full">
           <label className="block mb-2 font-semibold w-[50%]">Group Name</label>

@@ -33,7 +33,7 @@ function NoteEditor({ onSave, selectedGroup }) {
       ></textarea>
       <button
         onClick={handleSave}
-        className="mt-2 wfull py-2 rounded  fle  absolute left-[95%]"
+        className="mt-2 wfull py-2 rounded  fle  absolute left-[95%] max-md:left-[80%]"
         disabled={!content.trim()}
       >
         <svg
