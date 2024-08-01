@@ -20,8 +20,8 @@ function Sidebar({ groups, onGroupSelect, onNewGroup }) {
   };
 
   const handleGroupSelect = (id) => {
-    setSelectedGroupId(id); // Update the selected group ID
-    onGroupSelect(id); // Call the parent function if needed
+    setSelectedGroupId(id); 
+    onGroupSelect(id); 
   };
 
   return (
